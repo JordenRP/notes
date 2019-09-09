@@ -1,0 +1,74 @@
+.button
+  display: flex
+  align-items: center
+  justify-content: center
+  
+  width: 120px
+  height: 120px
+  
+  cursor: pointer
+  background-color: #01579B
+  border: none
+
+  transition-property: transform;
+  transition-duration: 300ms;
+
+.button:hover
+  transform: scale(1.1)
+
+  
+.button__label
+  font-size: 18px
+  font-weight: bold
+  color: white
+  
+.new-card
+  display: none
+  flex-direction: row
+  align-items: center
+  
+  width: 230px
+  height: 100px
+  padding: 25px 15px 25px 
+  
+  background-color: #EEEEEE
+ 
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23) 
+  border-radius: 10px
+  
+.new-card__form
+  display: flex
+  flex-direction: column
+  align-items: center
+  
+.new-card__input
+  font-size: 18px 
+  
+  width: 100% 
+  height: 40px 
+  
+  margin-top: 10px
+  padding-left: 10px 
+  
+  border: none 
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24) 
+  border-radius: 5px 
+  
+.new-card__sign
+  font-size: 14px
+  color: #000
+  margin-top: 5px
+ 
+  
+.new-card__remove
+  position: relative
+  left: 30px
+  bottom: 70px
+  svg
+    cursor: pointer
+    fill: #69F0AE 
+    
+.new-card__remove:hover
+  svg
+    transform: scale(1.1)
+  
