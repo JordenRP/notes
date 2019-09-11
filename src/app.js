@@ -1,13 +1,15 @@
 import './sass/main.sass'
 import './components/card/card.js'
-let template = require("./components/card/card.pug");
+import './components/new-card/new-card.js'
 
-let locals = {
-    name: ['Monday','Tuesday','Wednesday','Thursday']
-}
+// let template = require("./components/card/card.pug");
+
+// let locals = {
+//     name: ['Monday','Tuesday','Wednesday','Thursday']
+// }
 
 
-document.querySelector('main').insertAdjacentHTML('afterbegin', template(locals));
+// document.querySelector('main').insertAdjacentHTML('afterbegin', template(locals));
 
 
 let dashboard = document.querySelector('.dashboard')
