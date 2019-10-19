@@ -1,44 +1,76 @@
-window.add = function (e) {
-  if (e.keyCode === 13&&e.path[0].value != '') {
-    let code = document.createElement('li');
-    code.innerHTML = 
-    `<div class="task" onclick="done(this)">
-        <p class="task__name">  
-           ${e.path[0].value} 
-        </p>
-        <div class="task__check">
-          <svg class="task__check_svg" width="24" height="24" viewBox="0 0 24 24"><path d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg>
-        </div>
-      </div>`
-    e.path[1].lastElementChild.append(code)
-    e.path[0].value = ''
-  }
-};
+import Component from '../../js/lib/component.js';
+import store from '../../js/store/index.js';
+import tm from './card.pug';
+import tmTask from './task/task.pug'
 
+export default class Card extends Component {
+    
+    constructor() {
+        super();
 
-window.done = function (e){
-let target = e.closest('.task')
+        store.events.subscribe('openLabel', this.render, this);
+        store.events.subscribe('cardChange', this.createNewCard, this);
 
+        this.storage = store.state
+    }
+    
+    render(nameLable) {
+        this.element.innerHTML = ''
 
-if(!target) return 
+        this.storage = store.state['names'][nameLable]
+        
+        this.storage.forEach((item) => {
+            for (let title in item) {
+                let tasks = item[title]
 
-if (target.className == 'task') {
+                this.element.insertAdjacentHTML('beforeend', tm({title}))
 
-  target.className = 'task task__done'
-  
-  let fEl = target.firstElementChild 
-  let sEl = target.lastElementChild
-  
-  fEl.className = 'task__name through'
-  sEl.firstElementChild.setAttribute('class','task__check_svg gray')
+                if(tasks.length){
+                    this.element.lastChild.querySelector('ul').innerHTML = tmTask({tasks})
+                }
+            }
+        })
 
-} else if (target.className == 'task task__done') {
-  target.className = 'task'
-  
-  let fEl = target.firstElementChild 
-  let sEl = target.lastElementChild
-  
-  fEl.className = 'task__name'
-  sEl.firstElementChild.setAttribute('class','task__check_svg')
-}
+        const addTask = this.handle(this.storage)
+
+        this.element.querySelectorAll('.card').forEach((item)=>{
+            const input = item.querySelector('.card__input')
+            input.addEventListener('keydown', addTask)
+        })
+        
+        
+    }
+
+    handle (storage) {
+        return (e) => {
+            const input = e.target
+            if (e.keyCode === 13 && input.value != '') {
+                const task = input.value
+                const card = e.target.parentNode
+                const title = card.querySelector('.card__head').innerText.toLowerCase()
+
+                const cardStorage = storage.filter(item => { 
+                    if(item[title]) {
+                        return item
+                    }
+                })[0];
+
+                store.dispatch('addTask', task, cardStorage[title]);
+                card.querySelector('.card__list').insertAdjacentHTML('beforebegin', tmTask({task}));
+                input.value = '';
+            }
+        }   
+    };
+
+    createNewCard (title) {
+        const formCard = document.querySelector('.button')
+        formCard.insertAdjacentHTML('beforebegin',tm({title}))
+
+        const addTask = this.handle(this.storage)
+
+        this.element.querySelectorAll('.card').forEach((item)=>{
+            const input = item.querySelector('.card__input')
+            input.addEventListener('keydown', addTask)
+        })
+    }
 };
