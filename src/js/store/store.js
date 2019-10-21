@@ -35,7 +35,13 @@ export default class Store {
 
      
         self.actions[actionKey](self, payload, storage);
-        
+
+        console.log(self.state)
+
+        const serialObj = JSON.stringify(this.state['names']); //сериализуем его
+
+        localStorage.setItem('names', serialObj);
+
         console.groupEnd();
 
         return true;

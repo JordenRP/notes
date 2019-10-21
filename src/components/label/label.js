@@ -28,8 +28,6 @@ export default class Label extends Component {
         const name = e.target.closest('a').firstChild.innerText
         store.events.publish('openLabel', name);
 
-        const page = {'openLabel': name}
-
         window.history.pushState ({'openLabel': name}, null, "");
     };
 

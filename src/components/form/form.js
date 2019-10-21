@@ -29,9 +29,9 @@ export default class From extends Component {
             item.addEventListener("click", toggleForm)
         })
 
-        const button_create = document.querySelector('.form__button_create')
-        const button_cancel = document.querySelector('.form__button_cancel')
-        const input = document.querySelector('.form__input')
+        const button_create = form_ldb.querySelector('.form__button_create')
+        const button_cancel = form_ldb.querySelector('.form__button_cancel')
+        const input = form_ldb .querySelector('.form__input')
 
         button_create.addEventListener('click', this.handle.bind(this));
         input.addEventListener('keydown', (e) =>{

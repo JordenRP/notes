@@ -20,6 +20,14 @@ const headInstance = new Head();
 
 
 
+ 
+if(JSON.parse(localStorage.getItem('names'))) {
+    store.state['names'] = Object.assign(store.state['names'], JSON.parse(localStorage.getItem('names')))
+}
+    
+
+
+
 
 // Initial renders
 

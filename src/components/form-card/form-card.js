@@ -5,7 +5,7 @@ import toggle from '../../js/lib/toggle.js';
 
 export default class FromCard extends Component {
     
-    // Pass our store instance and the HTML element up to the parent Component
+    
     constructor() {
         super();
 
@@ -14,11 +14,7 @@ export default class FromCard extends Component {
         this.storage = store.state['names'];
     }
 
-    /**
-     * React to state changes and render the component's HTML
-     *
-     * @returns {void}
-     */
+
     render(nameLabel) {
        
         this.element.insertAdjacentHTML('beforeend',tm())
